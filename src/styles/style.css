@@ -12,8 +12,9 @@
   --green: #0a764f;
 
   --blue: #0534db;
-  --orange-345 :#C34500;
+  --orange-345:#C34500;
   --orange:#ff6700;
+  --red: #f72511;
 
   --black: #000;
 
@@ -40,7 +41,7 @@ i {
 .header {
   position: relative;
   /* background-color: var(--green-700); */
-  background-color: var(--orange);
+  background-color: var(--red);
   display: flex;
   align-items: center;
   width: 100%;
@@ -48,22 +49,27 @@ i {
 }
 
 .container-title {
+  
   width: 97%;
   display: flex;
   align-items: center;
 }
 
 .title {
-  color: var(--white-300);
+  color: white;
   font-size: 1.875rem;
   padding-left: 30px;
+}
+
+.title strong {
+  color: var(--orange);
 }
 
 .container-cartTitle {
   position: relative;
   display: flex;
   align-items: center;
-  background-color: var(--orange);
+  background-color: var(--red);
   width: 36%;
   height: 100%;
   margin-left: 20px;
@@ -81,7 +87,7 @@ i {
   width: 39.5%;
   height: 15px;
   /* background: var(--green); */
-  background: var(--orange-345);
+  background: var(--blue);
   transform: skew(-45deg);
   z-index: 0;
 }
@@ -93,7 +99,7 @@ i {
   right: 61.5%;
   width: 39.5%;
   height: 15px;
-  background: var(--orange-345);
+  background: var(--blue);
   transform: skew(45deg);
   z-index: 0;
 }
@@ -111,9 +117,6 @@ i {
   width: 100%;
 }
 
-.title strong {
-  color: var(--white-200);
-}
 
 .items {
   display: flex;
