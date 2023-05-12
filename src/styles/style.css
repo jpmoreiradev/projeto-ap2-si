@@ -64,7 +64,7 @@ i {
   display: flex;
   align-items: center;
   background-color: var(--orange);
-  width: 40%;
+  width: 36%;
   height: 100%;
   margin-left: 20px;
 }
@@ -168,10 +168,10 @@ i {
   position: sticky;
   top: -1px;
   display: flex;
-  flex-basis: 32%;
+  flex-basis: 30%;
   flex-flow: column wrap;
   background-color: var(--white-200);
-  height: 100vh;
+  height: 93vh;
 }
 
 .cart .cart__items {
@@ -259,7 +259,6 @@ i {
 }
 
 .invisible-cart {
-  
   display: none;
 }
 
@@ -337,10 +336,10 @@ i {
   font-size: 16px;
   transition: 0.4s;
   line-height: 30px;
-  width: 0px;
+  width: 300px;
 }
 .search-box:hover > .search-txt {
-  width: 240px;
+  width: 320px;
 }
 
 .material-icons {
