@@ -8,13 +8,14 @@
   --white-100: #fff;
   --white-200: #eee;
   --white-300: #ddd;
+  --gray: #cccccc;
 
   --green: #0a764f;
 
   --blue: #0534db;
-  --orange-345:#C34500;
+  --orange-345:#c5531f;
   --orange:#ff6700;
-  --red: #f72511;
+  --red: #ec2310;
 
   --black: #000;
 
@@ -57,11 +58,14 @@ i {
 
 .title {
   color: white;
+  font-family: monospace;
   font-size: 1.875rem;
   padding-left: 30px;
 }
 
 .title strong {
+  font-family: monospace;
+
   color: var(--orange);
 }
 
@@ -86,8 +90,7 @@ i {
   right: 61.5%;
   width: 39.5%;
   height: 15px;
-  /* background: var(--green); */
-  background: var(--blue);
+  background: var(--white-300);
   transform: skew(-45deg);
   z-index: 0;
 }
@@ -99,15 +102,16 @@ i {
   right: 61.5%;
   width: 39.5%;
   height: 15px;
-  background: var(--blue);
+  background: var(--white-300);
   transform: skew(45deg);
   z-index: 0;
 }
 
 .container-cartTitle .cart__title {
-  color: var(--white-100);
+  color: var(--red);
+  font-family: monospace;
   font-size: 20px;
-  padding-left: 35px;
+  padding-left: 20px;
   font-weight: 700;
 }
 
