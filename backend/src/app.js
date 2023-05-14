@@ -1,6 +1,5 @@
 import express from "express";
 
-
 const app = express();
 const PORT = process.env.PORT || 3333
 
@@ -11,5 +10,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log('Serve is running at: http://localhost:3333');
+  console.log(`Serve is running at: http://localhost:${PORT}`);
 })
