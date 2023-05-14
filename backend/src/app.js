@@ -1,4 +1,8 @@
+import 'dotenv/config';
+import './database/index.js'
+
 import express from "express";
+
 
 const app = express();
 const PORT = process.env.PORT || 3333
@@ -6,7 +10,7 @@ const PORT = process.env.PORT || 3333
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('Hello World')
+  res.json({"hello": 'hello World'})
 })
 
 app.listen(PORT, () => {

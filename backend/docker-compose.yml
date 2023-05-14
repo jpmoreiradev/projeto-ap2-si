@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+  mysql:
+    container_name: unistore_mysql
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_USER: '$DB_USERNAME'
+      MYSQL_PASSWORD: '$DB_PASSWORD'
+      MYSQL_DATABASE: '$DB_NAME'
+    ports:
+      - '3306:3306'
