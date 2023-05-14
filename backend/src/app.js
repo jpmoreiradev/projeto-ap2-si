@@ -1,18 +1,16 @@
-import 'dotenv/config';
-import './database/index.js'
-
 import express from "express";
-
+import userRouter from "./routes/userRouter.js"
 
 const app = express();
-const PORT = process.env.PORT || 3333
 
-app.use(express.json())
+app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.json({"hello": 'hello World'})
-})
+  res.json({"hello": 'Welcome to our products api'})
+});
 
-app.listen(PORT, () => {
-  console.log(`Serve is running at: http://localhost:${PORT}`);
-})
+
+app.use('/user', userRouter);
+
+
+export default app;

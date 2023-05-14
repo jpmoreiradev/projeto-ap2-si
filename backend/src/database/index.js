@@ -1,8 +1,10 @@
 import Sequelize from 'sequelize';
 import config from '../config/database.js'; 
+import User from '../models/UserModel.js'
+
 
 const models = [
-
+  User
 ]
 
 class Database {
