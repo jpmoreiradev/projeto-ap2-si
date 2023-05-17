@@ -24,7 +24,6 @@ class Database {
       .catch(err =>
         console.log('Unable to connect to the MySQL database:', err)
       );
-
     models
       .map(model => {
         try {
