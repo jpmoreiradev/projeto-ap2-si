@@ -1,9 +1,9 @@
 import Sequelize, { Model } from 'sequelize';
 import bCrypt from 'bcryptjs';
 
-class Cliente extends Model {
+class Clientes extends Model {
   static init(sequelize) {
-    this.init(
+    super.init(
       {
         clienteId: {
           type: Sequelize.BIGINT,
@@ -17,15 +17,21 @@ class Cliente extends Model {
         clienteName: Sequelize.STRING,
         clientePassword: Sequelize.STRING,
       },
-      { sequelize, clientes}
+      { sequelize }
     );
-    
+
+    this.addHook('beforeCreate', async client => {
+      if (client.clientePassword) {
+        client.clientePassword = await bCrypt.hash(client.clientePassword, 8);
+      }
+    });
+
     return this;
   }
 
   async checkPassword(password) {
-    return bCrypt.compare(`${password}`, `${this.password}`);
+    return bCrypt.compare(password, this.clientePassword);
   }
 }
 
-export default Cliente;
+export default Clientes;

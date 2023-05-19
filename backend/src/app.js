@@ -1,6 +1,6 @@
 import express from "express";
 import productsRouter from "./routes/productsRouter.js"
-import clientesRouter from "./routes/clientesRoutes.js"
+import clientsRouter from "./routes/clientRouter.js"
 
 const app = express();
 
@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
   res.json({"hello": 'Welcome to our products api'})
 });
 
-app.use('/products', productsRouter);
-app.use('/cliente', clientesRouter );
+app.use('/produtos', productsRouter);
+app.use('/cliente', clientsRouter);
 
 export default app;
