@@ -1,10 +1,10 @@
 import Sequelize from 'sequelize';
 import config from '../config/database.js'; 
-import User from '../models/UserModel.js'
+import cliente from '../models/ClienteModel.js'
 
 
 const models = [
-  User
+  cliente
 ]
 
 class Database {
