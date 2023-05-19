@@ -1,15 +1,14 @@
 import client from '../models/ClientModel.js'
 
 class ClientServices {
-  async show(clienteId) {
-     const clients = await client.findOne({
-      where: { clienteId }, 
-    })
-    return {
-        clienteId: clients?.clienteId,
-        clienteUser: clients?.clienteUser,
-        clienteName: clients?.clienteName,
-      }
+  async show() {
+    const clients = await client.findAll()
+
+    return clients.map(item => ({
+      clienteId: item.clienteId,
+      clienteUser: item.clienteUser,
+		  clienteName: item.clienteName,
+    }))
   }
 
   async create(clienteId, clienteUser, clienteName, clientePassword) {

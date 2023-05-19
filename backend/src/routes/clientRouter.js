@@ -1,10 +1,14 @@
 import express from "express";
 import clientsController from "../controllers/ClientsController.js";
+import SessionsController from "../controllers/SessionsController.js";
+import authentication from '../middleware/middleware.js'
 
 const router = express.Router()
 
-router.get('/profile/:clienteId', await clientsController.show)
+router.get('/profiles', authentication, await clientsController.show)
 router.post('/profile', await clientsController.create)
-// router.put('/profile', await clientsController.update)
+
+//login
+router.post('/login', await SessionsController.login)
 
 export default router;
