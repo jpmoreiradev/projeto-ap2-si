@@ -1,6 +1,9 @@
+import productsServicer from "../services/ProductsServicer.js"
+
 class ProductsController {
   create(req, res) {
-    res.json({message: 'registered product'})
+    
+    
   }
 
 }

@@ -1,4 +1,4 @@
-import clientServices from '../services/ClientServices.js'
+import clientServices from '../services/ClientServicer.js'
 
 class ClientController {
   async showProfiles(req, res) {

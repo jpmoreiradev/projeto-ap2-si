@@ -68,7 +68,7 @@ class ClientServices {
   const deleteClient = await client.destroy({
     where: { clienteId }
   });
-  return deleteClient ? {message: "client deleted"} : {message: "cliente already deleted"}
+  return deleteClient ? {message: "client deleted"} : {message: "cliente not found"}
  }
 }
 export default new ClientServices();
