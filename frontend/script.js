@@ -10,6 +10,7 @@ cartIcon.addEventListener('click', () => {
   document.getElementsByClassName('container-cartTitle')[0].classList.toggle('invisible-cart');
   document.getElementsByClassName('cart')[0].classList.toggle('invisible-cart');
 });
+
 const createProductImageElement = (imageSource) => {
   const img = document.createElement('img');
   img.className = 'item__image';
@@ -43,25 +44,6 @@ const createProductItemElement = ({ sku, name, image, price }) => {
   return section;
 };
 
-const showPrice = () => {
-  let finalValue = 0;
-  cardItems.childNodes.forEach((item) => {
-  const value = item.textContent.split('PRICE: $')[1];
-  finalValue += Number(value);
-  });
-  totalPrice.innerHTML = finalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-};
-
-const cartItemClickListener = async () => {
-  cardItems.addEventListener('click', (e) => {
-    if (e.target.classList.contains('material-symbols-outlined')) {
-      e.target.parentElement.remove();
-      saveCartItems(cardItems.innerHTML);
-      showPrice();
-    }
-  });
-};
-
 const createCartItemElement = ({ sku, name, salePrice, image }) => {
   const li = document.createElement('li');
   const span = document.createElement('span');
@@ -83,6 +65,31 @@ const createLiReload = () => {
   li.innerText = 'carregando...';
   return li;
 };
+
+emptyCart.addEventListener('click', () => {
+  cardItems.innerHTML = '';
+  saveCartItems(cardItems.innerHTML);
+  showPrice();
+});
+
+btnSearch.addEventListener('click', async () => {
+  items.innerHTML = '';
+  const product = searchInput.value.trim();
+  await showProduct(product);
+  searchInput.value = '';
+});
+
+searchInput.addEventListener('keyup', async (e) => {
+  if(e.keyCode === 13) {
+    items.innerHTML = '';
+    const product = searchInput.value.trim();
+    await showProduct(product);
+    searchInput.value = '';
+  }
+});
+
+
+// Principal
 
 const showProduct = async (product) => {
   const ele = createLiReload();
@@ -114,32 +121,32 @@ const addShoppingCart = async () => {
   });
 };
 
+const cartItemClickListener = async () => {
+  cardItems.addEventListener('click', (e) => {
+    if (e.target.classList.contains('material-symbols-outlined')) {
+      e.target.parentElement.remove();
+      saveCartItems(cardItems.innerHTML);
+      showPrice();
+    }
+  });
+};
+
 const getCartItems = () => {
   cardItems.innerHTML = getSavedCartItems();
   showPrice();
 };
 
-emptyCart.addEventListener('click', () => {
-  cardItems.innerHTML = '';
-  saveCartItems(cardItems.innerHTML);
-  showPrice();
-});
+const showPrice = () => {
+  let finalValue = 0;
+  cardItems.childNodes.forEach((item) => {
+  const value = item.textContent.split('PRICE: $')[1];
+  finalValue += Number(value);
+  });
+  totalPrice.innerHTML = finalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+};
 
-btnSearch.addEventListener('click', async () => {
-  items.innerHTML = '';
-  const product = searchInput.value.trim();
-  await showProduct(product);
-  searchInput.value = '';
-});
 
-searchInput.addEventListener('keyup', async (e) => {
-  if(e.keyCode === 13) {
-    items.innerHTML = '';
-    const product = searchInput.value.trim();
-    await showProduct(product);
-    searchInput.value = '';
-  }
-});
+
 
 window.onload = async () => { 
   await showProduct('computador');
@@ -148,3 +155,5 @@ window.onload = async () => {
   getCartItems();
   showPrice();
 };
+
+
