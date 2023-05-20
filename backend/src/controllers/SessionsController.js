@@ -4,10 +4,6 @@ import jwt from 'jsonwebtoken'
 
 
 class SessionsController{
-
-
-
-
   async login(req, res) {
   const { clienteUser, clientePassword } = req.body
 
@@ -24,7 +20,6 @@ class SessionsController{
   }
 
   const token = jwt.sign({clienteId: client.clienteId}, security.secret, {expiresIn: security.expiresIn })
-
 
   return res.status(200).json({
     clienteId: client.clienteId,
