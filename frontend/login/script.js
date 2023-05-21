@@ -26,7 +26,6 @@ const loginEvent = async () => {
   
     const login = await loginClient(clienteUser, clientePassword);
   
-
   
     if (login.auth) {
       alert('Login Bem-Sucedido! Bem-vindo a UNIstore');

@@ -90,9 +90,34 @@ searchInput.addEventListener('keyup', async (e) => {
   }
 });
 
+const getClientProfile = async (token) => {
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': token
+  }
+  
+  
+  const init = {
+    method: 'GET',
+    headers
+  }
+  
+  const response = await fetch('http://localhost:3000/cliente/profile', init)
+  const data = await response.json();
+  return data;
+}
+
+
 // Produto
 
 const showProduct = async (product) => {
+  const token = localStorage.getItem("token");
+
+  if(!token) {
+    window.location.href = "../login/index.html"; 
+  }
+
   const ele = createLiReload();
   cardItems.appendChild(ele);
   const data = await fetchProducts(product);
