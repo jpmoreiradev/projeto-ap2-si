@@ -29,7 +29,7 @@ const loginEvent = async () => {
 
   
     if (login.auth) {
-      alert('Login bem-sucedido!');
+      alert('Login Bem-Sucedido! Bem-vindo a UNIstore');
       window.location.href = "../products/index.html"; 
       } else {
       alert('Nome de usuário ou senha incorretos. Tente novamente.');
