@@ -6,6 +6,8 @@ const cartIcon = document.getElementsByClassName('material-icons')[0];
 const searchInput = document.getElementsByClassName('search-txt')[0];
 const btnSearch = document.getElementsByClassName('fa-search')[0];
 
+// Utils
+
 cartIcon.addEventListener('click', () => {
   document.getElementsByClassName('container-cartTitle')[0].classList.toggle('invisible-cart');
   document.getElementsByClassName('cart')[0].classList.toggle('invisible-cart');
@@ -88,8 +90,26 @@ searchInput.addEventListener('keyup', async (e) => {
   }
 });
 
+const getClientProfile = async (token) => {
+  
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': token
+  }
+  
+  
+  const init = {
+    method: 'GET',
+    headers
+  }
+  
+  const response = await fetch('http://localhost:3000/cliente/profile', init)
+  const data = await response.json();
+  return data;
+}
 
-// Principal
+
+// Produto
 
 const showProduct = async (product) => {
   const ele = createLiReload();
@@ -105,6 +125,11 @@ const showProduct = async (product) => {
 
 const addShoppingCart = async () => {
   document.addEventListener('click', async (e) => {
+    const token = localStorage.getItem("token");
+
+    if(!token) {
+      window.location.href = "./login/index.html"; 
+    }
     if (e.target.classList.contains('item__add')) {
         const ele = createLiReload();
         cardItems.appendChild(ele);
@@ -144,8 +169,6 @@ const showPrice = () => {
   });
   totalPrice.innerHTML = finalValue.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 };
-
-
 
 
 window.onload = async () => { 
