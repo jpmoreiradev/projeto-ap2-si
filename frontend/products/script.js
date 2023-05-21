@@ -112,12 +112,6 @@ const getClientProfile = async (token) => {
 // Produto
 
 const showProduct = async (product) => {
-  const token = localStorage.getItem("token");
-
-  if(!token) {
-    window.location.href = "../login/index.html"; 
-  }
-
   const ele = createLiReload();
   cardItems.appendChild(ele);
   const data = await fetchProducts(product);
@@ -131,6 +125,11 @@ const showProduct = async (product) => {
 
 const addShoppingCart = async () => {
   document.addEventListener('click', async (e) => {
+    const token = localStorage.getItem("token");
+
+    if(!token) {
+      window.location.href = "./login/index.html"; 
+    }
     if (e.target.classList.contains('item__add')) {
         const ele = createLiReload();
         cardItems.appendChild(ele);
