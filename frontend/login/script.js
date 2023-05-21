@@ -17,7 +17,7 @@ const loginClient = async (clienteUser, clientePassword) => {
   return data;
 }
 
-const seila = async () => {
+const loginEvent = async () => {
 
   document.getElementById('login-form').addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -30,13 +30,13 @@ const seila = async () => {
   
     if (login.auth) {
       alert('Login bem-sucedido!');
-      window.location.href = 'index.html'; 
+      window.location.href = "../products/index.html"; 
       } else {
       alert('Nome de usuário ou senha incorretos. Tente novamente.');
     }
   });
 }
   
-seila()
+loginEvent()
 
 
