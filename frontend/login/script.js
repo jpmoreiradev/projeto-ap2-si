@@ -23,7 +23,7 @@ const loginEvent = async () => {
     event.preventDefault();
     const clienteUser = document.getElementById('username').value;
     const clientePassword = document.getElementById('password').value;
-  
+    console.log(clienteUser, clientePassword)
     const login = await loginClient(clienteUser, clientePassword);
   
   
