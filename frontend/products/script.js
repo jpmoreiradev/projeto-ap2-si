@@ -125,13 +125,13 @@ const showProduct = async (product) => {
 
 const addShoppingCart = async () => {
   document.addEventListener('click', async (e) => {
-    const token = localStorage.getItem("token");
-
-    if(!token) {
-      window.location.href = "./login/index.html"; 
-    }
     if (e.target.classList.contains('item__add')) {
-        const ele = createLiReload();
+      const token = localStorage.getItem("token");
+  
+      if(!token) {
+        window.location.href = "./login/index.html"; 
+      }
+      const ele = createLiReload();
         cardItems.appendChild(ele);
         const idElement = e.target.parentElement.firstChild.textContent;
         const { id, title, price, thumbnail } = await fetchItem(idElement);
