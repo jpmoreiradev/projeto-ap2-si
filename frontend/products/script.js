@@ -3,6 +3,7 @@ const cardItems = document.getElementsByClassName('cart__items')[0];
 const totalPrice = document.getElementsByClassName('total-price')[0];
 const emptyCart = document.getElementsByClassName('empty-cart')[0];
 const cartIcon = document.getElementsByClassName('material-icons')[0];
+const logoutIcon = document.getElementsByClassName('logout-btn')[0];
 const searchInput = document.getElementsByClassName('search-txt')[0];
 const btnSearch = document.getElementsByClassName('fa-search')[0];
 
@@ -11,6 +12,21 @@ const btnSearch = document.getElementsByClassName('fa-search')[0];
 cartIcon.addEventListener('click', () => {
   document.getElementsByClassName('container-cartTitle')[0].classList.toggle('invisible-cart');
   document.getElementsByClassName('cart')[0].classList.toggle('invisible-cart');
+});
+
+logoutIcon.addEventListener('click', () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    const resposta = confirm("Você deseja sair ?");
+    if (resposta) {
+      // Código a ser executado se o usuário clicar em "OK"
+      localStorage.removeItem("token");
+    } else {
+      // Código a ser executado se o usuário clicar em "Cancelar"
+    }
+  } else {
+    alert("Você não fez o login.")
+  }
 });
 
 const createProductImageElement = (imageSource) => {
