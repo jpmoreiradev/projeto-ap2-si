@@ -10,14 +10,13 @@ class ClientController {
     const { clienteId, clienteUser, clienteName, clientePassword } = req.body
     try {
       if(!clienteUser || !clienteName || !clientePassword) {
-        res.status(401).json({message: 'params invalid'})
+        return res.status(401).json({message: 'params invalid'})
       }
       const newClient = await clientServices.create(clienteId, clienteUser, clienteName, clientePassword)
-      
-      
+    
       
       if(!newClient) {
-        res.status(400).json({message: 'client already exist'})
+        return res.status(400).json({message: 'client already exist'})
       }
       
       return res.json(newClient)
@@ -32,19 +31,38 @@ class ClientController {
   }
 
   async update(req, res) {
-    const { clienteUser, clienteName, clientePassword } = req.body
-    
-  if(!clienteUser || !clienteName || !clientePassword) {
-    res.status(400).json({message: 'params invalid'})
-  }
+    const { clienteUser, clienteName, clienteOldPassword, clienteNewPassword} = req.body
 
-  const updateClient = await clientServices.update(req.clienteId, clienteUser, clienteName, clientePassword)
+    
+    if(!clienteUser || !clienteName || !clienteOldPassword || !clienteNewPassword) {
+      return res.status(400).json({message: 'params invalid'})
+    } 
+
+
+  const updateClient = await clientServices.update(req.clienteId, clienteUser, clienteName, clienteOldPassword, clienteNewPassword)
+
+  if(updateClient === 4) {
+    return res.status(400).json({message: 'username already exist'})
+    
+  }
 
   if(!updateClient) {
-    res.status(400).json({message: 'user not found'})
+    return res.status(400).json({message: 'user not update'})
+  }
+  
+  if(updateClient === 1) {
+    return res.status(400).json({message: 'user not found'})
+  }
+  
+  if(updateClient === 2) {
+    return res.status(400).json({message: 'password invalid'})
+  }
+  if(updateClient === 3) {
+    return res.status(400).json({message: 'password repeat'})
+    
   }
 
-  return res.json(updateClient)
+  return res.json({updateClient})
  }
 
  async delete(req, res) {
