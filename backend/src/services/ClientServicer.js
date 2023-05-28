@@ -1,6 +1,5 @@
-import client from '../models/ClientModel.js'
+import client from '../models/ClientsModel.js'
 import bCrypt from 'bcryptjs';
-import security from '../config/auth.js';
 
 
 class ClientServices {

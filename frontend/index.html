@@ -31,6 +31,7 @@
     <script src="./utils/fetchProducts.js" defer></script>
     <script src="./utils/saveCartItems.js" defer></script>
     <script src="./utils/getSavedCartItems.js" defer></script>
+    <script src="./utils/fetchSaveProduct.js" defer></script>
     <script src="./products/script.js" defer></script>
 
     <link rel="shortcut icon" href="https://ava.unicatolicaquixada.edu.br/portal3/theme/image.php/boost/theme/1683567874/favicon">
@@ -58,12 +59,16 @@
     <section class="container">
       <section class="items"></section>
       <section class="cart">
+        <h1 class="buy-item"></h1>
         <ol class="cart__items"></ol>
         <div class="price">
           <span>Total:</span>
           <span class="total-price"></span>
         </div>
-        <button class="empty-cart">Esvaziar carrinho</button>
+        <div class="buttons-cart">
+          <button class="empty-cart">Esvaziar carrinho</button>
+          <button class="buy-cart">Comprar itens</button>
+        </div>
       </section>
     </section>
     <a class="back-to-top" href="#">➤</a>
