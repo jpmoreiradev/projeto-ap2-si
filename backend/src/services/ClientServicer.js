@@ -1,4 +1,4 @@
-import client from '../models/ClientModel.js'
+import client from '../models/ClientsModel.js'
 import bCrypt from 'bcryptjs';
 
 
@@ -48,21 +48,45 @@ class ClientServices {
     }
   }
   
-  async update(clienteId, clienteUser, clienteName, clientePassword) {
+  async update(clienteId, clienteUser, clienteName, clienteOldPassword, clienteNewPassword ) {
+    if(clienteOldPassword === clienteNewPassword) {
+      return 3
+    }
+    
     const clientUser = await client.findOne({
-     where: { clienteId }, 
-   })
-   
-   if(!clientUser) {
-     return undefined
-   }
+      where: { clienteUser }, 
+    })
 
-   await client.update({clienteUser, clienteName, clientePassword: await bCrypt.hash(clientePassword, 8)}, {
+    const clientUserId = await client.findOne({
+      where: { clienteId }, 
+    })
+ 
+    if(clientUser) {
+      return 4
+    }
+
+    if(clientUserId ) {
+        return 1
+    }
+
+  const checkPassword = await clientUser.checkPassword(clienteOldPassword)
+  
+  if(!checkPassword) {
+    return 2
+  }
+
+ 
+
+
+
+  await client.update({clienteUser, clienteName, clientePassword: await bCrypt.hash(clienteNewPassword, 8)}, {
     where: { clienteId }
-   });
+    });
 
-   return {message: "client updated"}
- }
+
+
+  return {message: "client updated"}
+  }
 
  async delete(clienteId) {
   const deleteClient = await client.destroy({
