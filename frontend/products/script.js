@@ -88,12 +88,15 @@ const createLiReload = () => {
 
 emptyCart.addEventListener('click', () => {
   cardItems.innerHTML = '';
+  buyItem.innerHTML = '';
   saveCartItems(cardItems.innerHTML);
   showPrice();
 });
 
 buyCart.addEventListener('click', () => {
+  cardItems.innerHTML = '';
   buyItem.innerHTML = 'Produtos comprados';
+
 });
 
 btnSearch.addEventListener('click', async () => {
