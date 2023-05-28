@@ -1,7 +1,9 @@
 const items = document.querySelector('.items');
 const cardItems = document.getElementsByClassName('cart__items')[0];
+const buyItem = document.getElementsByClassName('buy-item')[0];
 const totalPrice = document.getElementsByClassName('total-price')[0];
 const emptyCart = document.getElementsByClassName('empty-cart')[0];
+const buyCart = document.getElementsByClassName('buy-cart')[0];
 const cartIcon = document.getElementsByClassName('material-icons')[0];
 const logoutIcon = document.getElementsByClassName('logout-btn')[0];
 const searchInput = document.getElementsByClassName('search-txt')[0];
@@ -90,6 +92,10 @@ emptyCart.addEventListener('click', () => {
   showPrice();
 });
 
+buyCart.addEventListener('click', () => {
+  buyItem.innerHTML = 'Produtos comprados';
+});
+
 btnSearch.addEventListener('click', async () => {
   items.innerHTML = '';
   const product = searchInput.value.trim();
@@ -140,8 +146,9 @@ const showProduct = async (product) => {
 };
 
 const addShoppingCart = async () => {
-  document.addEventListener('click', async (e) => {
-    if (e.target.classList.contains('item__add')) {
+  document.addEventListener('click', async (element) => {
+    if (element.target.classList.contains('item__add')) {
+      buyItem.innerHTML = '';
       const token = localStorage.getItem("token");
   
       if(!token) {
@@ -149,8 +156,9 @@ const addShoppingCart = async () => {
       }
       const ele = createLiReload();
         cardItems.appendChild(ele);
-        const idElement = e.target.parentElement.firstChild.textContent;
-        const { id, title, price, thumbnail } = await fetchItem(idElement);
+        const elementId = element.target.parentElement.firstChild.textContent;
+        await fetchSaveProduct(elementId)
+        const { id, title, price, thumbnail } = await fetchItem(elementId);
         const li = createCartItemElement(
           { sku: id, name: title, salePrice: price, image: thumbnail },
         );
