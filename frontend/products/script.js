@@ -94,6 +94,7 @@ emptyCart.addEventListener('click', () => {
 });
 
 buyCart.addEventListener('click', () => {
+  console.log(cardItems)
   cardItems.innerHTML = '';
   buyItem.innerHTML = 'Produtos comprados';
 
