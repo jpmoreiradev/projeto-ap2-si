@@ -29,3 +29,10 @@ CREATE TABLE `categorias` (
 	`categoria_name` varchar(48) NOT NULL,
 	PRIMARY KEY (`categoria_id`)
 );
+
+CREATE TABLE `carrinho` (
+    `carrinho_id` bigint(10) NOT NULL AUTO_INCREMENT,
+    `produto_id` varchar(32) NOT NULL,
+	`cliente_id` smallint(5) NOT NULL,
+	PRIMARY KEY (`carrinho_id`)
+	);
