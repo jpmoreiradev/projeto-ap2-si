@@ -1,4 +1,4 @@
-const getClientProfile = async (token) => {
+const fetchGetProfileClient = async (token) => {
   
   const headers = {
     'Content-Type': 'application/json',
@@ -17,6 +17,6 @@ const getClientProfile = async (token) => {
 }
 if (typeof module !== 'undefined') {
   module.exports = {
-    getClientProfile,
+    fetchGetProfileClient,
   };
 }

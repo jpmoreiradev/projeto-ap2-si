@@ -86,15 +86,16 @@ const createLiReload = () => {
   return li;
 };
 
-emptyCart.addEventListener('click', () => {
+emptyCart.addEventListener('click', async () => {
   cardItems.innerHTML = '';
   buyItem.innerHTML = '';
-  saveCartItems(cardItems.innerHTML);
+  const token = localStorage.getItem("token");
+  await fetchDeleteCartAll(token)
+  
   showPrice();
 });
 
 buyCart.addEventListener('click', () => {
-  console.log(cardItems)
   cardItems.innerHTML = '';
   buyItem.innerHTML = 'Produtos comprados';
 
@@ -154,38 +155,58 @@ const addShoppingCart = async () => {
     if (element.target.classList.contains('item__add')) {
       buyItem.innerHTML = '';
       const token = localStorage.getItem("token");
-  
-      if(!token) {
+
+      const verifyToken = await fetchGetProfileClient(token)  
+      if(verifyToken.message === 'unauthorized') {
         window.location.href = "./login/index.html"; 
       }
       const ele = createLiReload();
         cardItems.appendChild(ele);
         const elementId = element.target.parentElement.firstChild.textContent;
+
         await fetchSaveProduct(elementId)
-        const { id, title, price, thumbnail } = await fetchItem(elementId);
+        const { produtoId, produtoName, produtoPrice, produtoImage } = await fetchItem(elementId);
+
         const li = createCartItemElement(
-          { sku: id, name: title, salePrice: price, image: thumbnail },
+          { sku: produtoId, name: produtoName, salePrice: produtoPrice, image: produtoImage },
         );
+
         cardItems.appendChild(li);
         ele.remove();
-        saveCartItems(cardItems.innerHTML);
+        saveCartItems(produtoId, token);
         showPrice();
     }
   });
 };
 
 const cartItemClickListener = async () => {
-  cardItems.addEventListener('click', (e) => {
-    if (e.target.classList.contains('material-symbols-outlined')) {
-      e.target.parentElement.remove();
-      saveCartItems(cardItems.innerHTML);
+  cardItems.addEventListener('click', async (element) => {
+    if (element.target.classList.contains('material-symbols-outlined')) {
+
+
+      element.target.parentElement.remove();
       showPrice();
     }
   });
 };
 
-const getCartItems = () => {
-  cardItems.innerHTML = getSavedCartItems();
+const getCartItems = async () => {
+  const token = localStorage.getItem("token");
+  const data = await getSavedCartItems(token);
+
+  console.log(data[0])
+
+  data.map(async item => {
+    const { produtoId, produtoName, produtoPrice, produtoImage } = await fetchItem(item.produtoId);
+
+    const li = createCartItemElement(
+      { sku: produtoId, name: produtoName, salePrice: produtoPrice, image: produtoImage },
+    );
+
+    cardItems.appendChild(li);
+
+  })
+
   showPrice();
 };
 
@@ -203,7 +224,7 @@ window.onload = async () => {
   await showProduct('computador');
   await addShoppingCart();
   await cartItemClickListener();
-  getCartItems();
+  await getCartItems();
   showPrice();
 };
 

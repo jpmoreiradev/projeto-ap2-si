@@ -12,6 +12,7 @@ CREATE TABLE `produtos` (
 	`categoria_id` varchar(16) NOT NULL,
 	`produto_name` varchar(256) NOT NULL,
 	`produto_price` DECIMAL(10,2) NOT NULL,
+	`produto_image` varchar(256) NOT NULL,
 	PRIMARY KEY (`produto_id`)
 );
 

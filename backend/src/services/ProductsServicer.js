@@ -2,6 +2,7 @@ import Categorias from '../models/CategoriesModel.js';
 import Produtos from '../models/ProductsModel.js';
 import Carrinho from '../models/CartModel.js'
 import productsApi from './mercadoLivreApi/ProductsApi.js';
+import { Op } from 'sequelize';
 class ProductsServicer {
   async create(produtoId) {
     const productItem = await productsApi.productItem(produtoId)
@@ -39,11 +40,23 @@ class ProductsServicer {
       produtoId: productItem.id,
       categoriaId: productItem.category_id,
       produtoName: productItem.title,
-      produtoPrice: productItem.price
+      produtoPrice: productItem.price,
+      produtoImage: productItem.thumbnail,
+
     })
 
     return newProduct;
 
+  }
+ 
+  async getProductById(produtoId) {
+    const product = await Produtos.findOne({
+      where: { produtoId }
+    })
+    if(!product) {
+        return undefined
+    }
+    return product
   }
 
   async addCart(produtoId, clienteId) {
@@ -63,6 +76,52 @@ class ProductsServicer {
     return product; 
   }
 
+  async deleteCartAll(clienteId) {
+    const myProducts = await Carrinho.findOne({
+      where: { clienteId }
+    })
+    if(!myProducts) {
+        return undefined
+    }  
+
+    const allDeleted = await Carrinho.destroy({
+      where: { clienteId }
+    });
+
+    return allDeleted;
+  }
+
+  async deleteCartById(clienteId, produtoId) {
+    const myProduct = await Carrinho.findOne({
+      where: {
+        [Op.and]: [
+          {clienteId},
+          {produtoId}
+        ]
+      }
+    })
+    if(!myProduct) {
+        return undefined
+    }  
+
+    const deletedById = await Carrinho.destroy({
+      where: { carrinhoId: myProduct.carrinhoId }
+    });
+
+    return deletedById;
+  }
+
+  async getAllProductCart(clienteId) {
+      const myProducts = await Carrinho.findAll({
+        where: { clienteId }
+      })
+      if(!myProducts) {
+          return undefined
+      }  
+
+      return myProducts;
+  }
 }
+
 
 export default new ProductsServicer();

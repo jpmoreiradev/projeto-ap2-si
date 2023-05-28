@@ -14,6 +14,7 @@ class Produtos extends Model {
         },
         produtoName: Sequelize.STRING,
         produtoPrice: Sequelize.NUMBER,
+        produtoImage: Sequelize.STRING 
       },
       { sequelize }
     );
