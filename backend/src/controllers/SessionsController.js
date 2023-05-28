@@ -1,4 +1,4 @@
-import Clientes from "../models/ClientModel.js"
+import Clientes from "../models/ClientsModel.js"
 import  security from '../config/auth.js'
 import jwt from 'jsonwebtoken'
 

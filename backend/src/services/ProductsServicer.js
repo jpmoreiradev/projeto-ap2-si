@@ -1,7 +1,7 @@
-import Categorias from '../models/Categorias.js';
-import Produtos from '../models/ProductModel.js';
+import Categorias from '../models/CategoriesModel.js';
+import Produtos from '../models/ProductsModel.js';
+import Carrinho from '../models/CartModel.js'
 import productsApi from './mercadoLivreApi/ProductsApi.js';
-
 class ProductsServicer {
   async create(produtoId) {
     const productItem = await productsApi.productItem(produtoId)
@@ -44,6 +44,23 @@ class ProductsServicer {
 
     return newProduct;
 
+  }
+
+  async addCart(produtoId, clienteId) {
+    const product = await Produtos.findOne({
+      where: { produtoId }
+    })
+    if(!product) {
+        return 1
+    }
+
+    await Carrinho.create({
+      produtoId: product.produtoId,
+      clienteId
+    })
+
+
+    return product; 
   }
 
 }

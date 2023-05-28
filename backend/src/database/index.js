@@ -1,14 +1,16 @@
 import Sequelize from 'sequelize';
 import config from '../config/database.js'; 
-import client from '../models/ClientModel.js'
-import product from '../models/ProductModel.js'
-import categorias from '../models/Categorias.js';
+import clients from '../models/ClientsModel.js'
+import products from '../models/ProductsModel.js'
+import categories from '../models/CategoriesModel.js';
+import cart from '../models/CartModel.js'
 
 
 const models = [
-  client,
-  product,
-  categorias
+  clients,
+  products,
+  categories,
+  cart
 ]
 
 class Database {
