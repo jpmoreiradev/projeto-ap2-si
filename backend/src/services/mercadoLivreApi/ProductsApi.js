@@ -5,7 +5,12 @@ class ProductsApi {
     const URL = `https://api.mercadolibre.com/items/${produtoId}`;
     const {data} = await axios.get(URL)
     return data;
+  }
 
+  async categoryItem(categoryId) { 
+    const URL = `https://api.mercadolibre.com/categories/${categoryId}`;
+    const {data} = await axios.get(URL)
+    return data;
   }
 
 }
