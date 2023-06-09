@@ -91,6 +91,26 @@ class ProductsController {
 
   }
 
+  async addBuyItem(req, res) {
+    const {produtoId} = req.params;
+    const {clienteId} = req
+
+    if(!produtoId) {
+      return res.status(400).json({message: 'product id undefined'})
+    }
+
+    if(!clienteId) {
+      return res.status(401).json({message: 'token invalid'})
+    }
+
+    const newBuyItem = await productsServicer.addBuyItem(produtoId, clienteId)
+
+    if(newBuyItem === 1) {
+      return res.status(400).json({message: 'product not found'})
+    }
+    return res.json({ newBuyItem })
+  }
+
   }
 
 export default new ProductsController()

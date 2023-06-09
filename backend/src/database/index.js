@@ -4,13 +4,15 @@ import clients from '../models/ClientsModel.js'
 import products from '../models/ProductsModel.js'
 import categories from '../models/CategoriesModel.js';
 import cart from '../models/CartModel.js'
+import pedidos from '../models/MyRequestsModel.js'
 
 
 const models = [
   clients,
   products,
   categories,
-  cart
+  cart,
+  pedidos
 ]
 
 class Database {

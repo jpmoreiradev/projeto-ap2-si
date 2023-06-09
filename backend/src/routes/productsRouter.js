@@ -18,6 +18,10 @@ router.get('/carrinho/all', authentication, await productsController.showCart)
 router.delete('/delete/carrinho/all', authentication, await productsController.deleteCartAll)
 router.delete('/delete/carrinho/:produtoId', authentication, await productsController.deleteCartById)
 
+// Meus pedidos
+
+router.post('/pedidos/:produtoId', authentication, await productsController.addBuyItem)
+
 
 
 

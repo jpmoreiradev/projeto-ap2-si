@@ -97,7 +97,7 @@ emptyCart.addEventListener('click', async () => {
 
 buyCart.addEventListener('click', () => {
   cardItems.innerHTML = '';
-  buyItem.innerHTML = 'Produtos comprados';
+  buyItem.innerHTML =  `<h1>Produtos comprados<h1/>`;
 
 });
 
@@ -116,25 +116,6 @@ searchInput.addEventListener('keyup', async (e) => {
     searchInput.value = '';
   }
 });
-
-const getClientProfile = async (token) => {
-  
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': token
-  }
-  
-  
-  const init = {
-    method: 'GET',
-    headers
-  }
-  
-  const response = await fetch('http://localhost:3000/cliente/profile', init)
-  const data = await response.json();
-  return data;
-}
-
 
 // Produto
 
@@ -155,7 +136,6 @@ const addShoppingCart = async () => {
     if (element.target.classList.contains('item__add')) {
       buyItem.innerHTML = '';
       const token = localStorage.getItem("token");
-
       const verifyToken = await fetchGetProfileClient(token)  
       if(verifyToken.message === 'unauthorized') {
         window.location.href = "./login/index.html"; 
