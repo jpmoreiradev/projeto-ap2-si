@@ -23,19 +23,27 @@ const loginEvent = async () => {
     event.preventDefault();
     const clienteUser = document.getElementById('username').value;
     const clientePassword = document.getElementById('password').value;
-    console.log(clienteUser, clientePassword)
     const login = await loginClient(clienteUser, clientePassword);
   
-  
     if (login.auth) {
-      alert('Login Bem-Sucedido! Bem-vindo a UNIstore');
+      alert('Login Bem-Sucedido! Bem-vindo a Unistore');
       window.location.href = "../index.html"; 
+      } else if (login.error === 'Usuário inexistente') {
+        const boolean = confirm(`conta ${clienteUser} não existe, deseja criar uma conta?`);
+        if(boolean) {
+          window.location.href = "../register/index.html"; 
+        }
       } else {
-      alert('Nome de usuário ou senha incorretos. Tente novamente.');
-    }
+        alert('senha incorreta. Tente novamente.');
+      }
   });
 }
-  
+
 loginEvent()
+
+if (typeof module !== 'undefined') {
+  module.exports = loginClient;
+}
+
 
 

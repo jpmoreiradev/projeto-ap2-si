@@ -22,11 +22,11 @@ const registerEvent = async () => {
       const clienteName = document.getElementById('name').value;
       const clienteUser = document.getElementById('username').value;
       const clientePassword = document.getElementById('password').value;
-      console.log(clienteUser, clientePassword)
       const register = await createClient(clienteName, clienteUser, clientePassword);
-    
+          
     
       if (register.newClient) {
+        console.log( await loginClient(clienteUser, clientePassword))
         alert('Cadastro Bem-Sucedido! Bem-vindo a UNIstore');
         window.location.href = "../index.html"; 
         } else {
