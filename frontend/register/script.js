@@ -27,7 +27,7 @@ const registerEvent = async () => {
     
       if (register.newClient) {
         console.log( await loginClient(clienteUser, clientePassword))
-        alert('Cadastro Bem-Sucedido! Bem-vindo a UNIstore');
+        alert('Cadastro Bem-Sucedido! Bem-vindo a Unistore');
         window.location.href = "../index.html"; 
         } else {
         alert(`${register.message}`);

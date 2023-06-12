@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="products/style.css" />
+    <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
       rel="stylesheet"
@@ -15,28 +15,16 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,100,0,-25"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-    />
-    <script src="./utils/fetchItem.js" defer></script>
-    <script src="./utils/fetchProducts.js" defer></script>
-    <script src="./utils/saveCartItems.js" defer></script>
-    <script src="./utils/getSavedCartItems.js" defer></script>
-    <script src="./utils/fetchSaveProduct.js" defer></script>
-    <script src="./utils/fetchGetProfileClient.js" defer></script>
-    <script src="./utils/fetchDeleteCartAll.js" defer></script>
-    <script src="./utils/fetchDeleteCartById.js" defer></script>
-
-    <script src="./products/script.js" defer></script>
+    <script src="../utils/fetchItem.js" defer></script>
+    <script src="../utils/fetchProducts.js" defer></script>
+    <script src="../utils/saveCartItems.js" defer></script>
+    <script src="../utils/getSavedCartItems.js" defer></script>
+    <script src="../utils/fetchSaveProduct.js" defer></script>
+    <script src="../utils/fetchGetProfileClient.js" defer></script>
+    <script src="../utils/fetchDeleteCartAll.js" defer></script>
+    <script src="../utils/fetchDeleteCartById.js" defer></script>
+    <script src="../utils/fetchMyItemsAll.js" defer></script>
+    <script src="script.js" defer></script>
 
     <link
       rel="shortcut icon"
@@ -57,7 +45,6 @@
           container.classList.remove("active");
         }
       }
-
       function handleMenuMouseLeave() {
         var container = document.querySelector(".expand-container");
         var menu = document.getElementById("expandMenu");
@@ -77,22 +64,10 @@
   <body>
     <header class="header">
       <div class="container-title">
-        <a href="./index.html"> <span class="title"><strong>UNI</strong>Store</span></a>
-        <div class="search-box">
-          <input class="search-txt" type="text" placeholder="Pesquisar" />
-          <a class="search-btn" href="#">
-            <i class="fas fa-search"></i>
-          </a>
-        </div>
-      </div>
-      <i class="material-icons" style="font-size: 40px; color: white; padding: 10px;"
-        >shopping_cart</i
-      >
-      <div class="container-cartTitle">
-        <span class="cart__title">Meu carrinho</span>
+        <a href="../index.html"> <span class="title"><strong>UNI</strong>Store</span></a>
       </div>
       <div class="expand-container">
-        <button class="icons material-icons" style="font-size: 40px; color: white; padding: 10px" onclick="toggleMenu()">
+        <button class="icons material-icons"  style="font-size: 40px; color: white; padding: 10px" onclick="toggleMenu()">
           account_circle
         </button>
         <div class="expand-menu" id="expandMenu" onmouseleave="handleMenuMouseLeave()">
@@ -100,26 +75,18 @@
             <li class="login"> Login</li>
             <li class="profile"> Perfil</li>
             <li class="my-products"> Meus pedidos </li>
-            <li class="logout-btn"><a href="login/index.html">Sair</a></li>
+            <li class="logout-btn"><a href="../index.html">Sair</a></li>
           </ul>
         </div>
       </div>
     </header>
+    <h1>Meus pedidos</h1>
     <section class="container">
       <section class="items"></section>
-      <section class="cart">
         <h1 class="buy-item"></h1>
         <ol class="cart__items"></ol>
-        <div class="price">
-          <span>Total:</span>
-          <span class="total-price"></span>
-        </div>
-        <div class="buttons-cart">
-          <button class="empty-cart">Esvaziar carrinho</button>
-          <button class="buy-cart">Comprar itens</button>
-        </div>
-      </section>
     </section>
     <a class="back-to-top" href="#">➤</a>
   </body>
-</html>
+  </html>
+  
