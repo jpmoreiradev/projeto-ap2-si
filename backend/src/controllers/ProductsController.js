@@ -111,6 +111,17 @@ class ProductsController {
     return res.json({ newBuyItem })
   }
 
+  async showMyProduct(req, res) {
+    const {clienteId} = req
+    const allProductCart = await productsServicer.getAllMyProduct(clienteId)
+
+    if(!allProductCart) {
+      return res.status(404).json({message: 'not found'})
+    }
+
+    return res.json(allProductCart)
+
+  }
   }
 
 export default new ProductsController()

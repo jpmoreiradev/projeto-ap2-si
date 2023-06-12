@@ -121,6 +121,18 @@ class ProductsServicer {
       return myProducts;
   }
 
+  async getAllMyProduct(clienteId) {
+    const myProducts = await Pedidos.findAll({
+      where: { clienteId }
+    })
+    if(!myProducts) {
+        return undefined
+    }  
+
+    return myProducts;
+}
+
+
   async addBuyItem(produtoId, clienteId) {
     const product = await Produtos.findOne({
       where: { produtoId }

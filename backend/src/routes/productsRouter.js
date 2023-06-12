@@ -21,6 +21,7 @@ router.delete('/delete/carrinho/:produtoId', authentication, await productsContr
 // Meus pedidos
 
 router.post('/pedidos/:produtoId', authentication, await productsController.addBuyItem)
+router.get('/pedidos/all', authentication, await productsController.showMyProduct)
 
 
 
