@@ -19,14 +19,11 @@ const currentInfos = async () => {
 currentInfos()
 
 
-
-
-
 myProducts.addEventListener('click', async () => {
     const token = localStorage.getItem("token");
     const verifyToken = await fetchGetProfileClient(token) 
     if (!verifyToken.message) {
-        window.location.href = "../myProducts/index.html";  
+        window.location.href = "../orders/index.html";  
       } else {
         alert("Você não fez o login.")
       }

@@ -130,14 +130,17 @@ header {
     border: none;
     border-radius: 4px;
     /* background-color: #333; */
-    background-color: #FF8C00;
+    /* background-color: #FF8C00; */
+    background-color: #ff6700;
     color: #fff;
     font-weight: bold;
     cursor: pointer;
   }
 
   .form-group button:hover {
-    background-color: #FFA500;
+    /* background-color: #555; */
+    /* background-color: #FFA500; */
+    background-color: #ff7800;
   }
 
   .form-group .signup-link {
