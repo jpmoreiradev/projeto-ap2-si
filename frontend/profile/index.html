@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>UNIStore - Perfil</title>
+    <link rel="stylesheet" href="./style.css">
+    <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+  <script src="../utils/fetchGetProfileClient.js" defer></script>
+  <script src="script.js" defer></script>
+
+  <script>
+    function toggleMenu() {
+      var container = document.querySelector(".expand-container");
+      var menu = document.getElementById("expandMenu");
+      var isActive = container.classList.contains("active");
+      if (!isActive) {
+        container.classList.add("active");
+        menu.style.opacity = 1;
+        menu.style.visibility = "visible";
+        menu.style.transform = "scaleY(1)";
+      } else {
+        container.classList.remove("active");
+      }
+    }
+    function handleMenuMouseLeave() {
+      var container = document.querySelector(".expand-container");
+      var menu = document.getElementById("expandMenu");
+      var isActive = container.classList.contains("active");
+
+      if (isActive) {
+        menu.style.opacity = 0;
+        menu.style.visibility = "hidden";
+        menu.style.transform = "scaleY(0)";
+        setTimeout(function () {
+          container.classList.remove("active");
+        }, 300);
+      }
+    }
+  </script>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container-title">
+        <a href="../index.html"> <span class="title"><strong>UNI</strong>Store</span></a>
+        </div>
+        <div class="expand-container">
+          <button class="icons material-icons"  style="font-size: 40px; color: white; padding: 10px;" onclick="toggleMenu()">
+            account_circle
+          </button>
+          <div class="expand-menu" id="expandMenu" onmouseleave="handleMenuMouseLeave()">
+            <ul>
+              <li class="login"> Login</li>
+              <li class="profile"> Perfil</li>
+              <li class="my-products"> Meus pedidos </li>
+              <li class="logout-btn"><a href="../index.html">Sair</a></li>
+            </ul>
+          </div>
+        </div>
+    </header>
+    <div class="container">
+      <h1>Meu Perfil</h1>
+      <form id="update-form">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" disabled />
+          <input
+            type="text"
+            id="new-nome"
+            name="nome"
+            placeholder="Digite novo nome"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="user">Usuário:</label>
+          <input type="text" id="user" name="user"  disabled />
+          <input
+            type="text"
+            id="new-user"
+            name="user"
+            placeholder="Digite seu novo usuário"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="old-pass">Senha Antiga:</label>
+          <input
+            type="password"
+            id="old-pass"
+            name="old-pass"
+            placeholder="Digite sua senha antiga"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="new-pass">Senha Nova:</label>
+          <input
+            type="password"
+            id="new-pass"
+            name="new-pass"
+            placeholder="Digite sua nova senha"
+            required
+          />
+        </div>
+        <button type="submit" class="btn">Salvar</button>
+      </form>
+    </div>
+    
+  </body>
+</html>

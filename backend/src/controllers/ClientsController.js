@@ -49,19 +49,10 @@ class ClientController {
   if(!updateClient) {
     return res.status(400).json({message: 'user not update'})
   }
-  
-  if(updateClient === 1) {
-    return res.status(400).json({message: 'user not found'})
-  }
-  
+    
   if(updateClient === 2) {
     return res.status(400).json({message: 'password invalid'})
   }
-  if(updateClient === 3) {
-    return res.status(400).json({message: 'password repeat'})
-    
-  }
-
   return res.json({updateClient})
  }
 

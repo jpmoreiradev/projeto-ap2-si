@@ -12,12 +12,13 @@ CREATE TABLE `produtos` (
 	`categoria_id` varchar(16) NOT NULL,
 	`produto_name` varchar(256) NOT NULL,
 	`produto_price` DECIMAL(10,2) NOT NULL,
+	`produto_image` varchar(256) NOT NULL,
 	PRIMARY KEY (`produto_id`)
 );
 
 
 CREATE TABLE `pedidos` (
-	`pedido_id` smallint(5) NOT NULL,
+	`pedido_id` smallint(5) NOT NULL AUTO_INCREMENT,
 	`produto_id` varchar(32) NOT NULL,
 	`cliente_id` smallint(5) NOT NULL,
 	`pedido_date` DATE NOT NULL,

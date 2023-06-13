@@ -8,23 +8,65 @@ const cartIcon = document.getElementsByClassName('material-icons')[0];
 const logoutIcon = document.getElementsByClassName('logout-btn')[0];
 const searchInput = document.getElementsByClassName('search-txt')[0];
 const btnSearch = document.getElementsByClassName('fa-search')[0];
+const account = document.getElementsByClassName('fa-search')[0];
+const myProducts = document.getElementsByClassName('my-products')[0];
+const login = document.getElementsByClassName('login')[0];
+const profile = document.getElementsByClassName('profile')[0];
+
 
 // Utils
+document.getElementsByClassName('cart')[0].classList.toggle('invisible-cart');
+document.getElementsByClassName('container-cartTitle')[0].classList.toggle('invisible-cart');
 
 cartIcon.addEventListener('click', () => {
-  document.getElementsByClassName('container-cartTitle')[0].classList.toggle('invisible-cart');
   document.getElementsByClassName('cart')[0].classList.toggle('invisible-cart');
+  document.getElementsByClassName('container-cartTitle')[0].classList.toggle('invisible-cart');
 });
 
-logoutIcon.addEventListener('click', () => {
+myProducts.addEventListener('click', async () => {
   const token = localStorage.getItem("token");
-  if (token) {
+  const verifyToken = await fetchGetProfileClient(token) 
+  if (!verifyToken.message) {
+    window.location.href = "./orders/index.html";  
+    } else {
+      alert("Você não fez o login.")
+    }
+})
+
+login.addEventListener('click', async () => {
+  const token = localStorage.getItem("token");
+  const verifyToken = await fetchGetProfileClient(token) 
+  
+  if (!verifyToken.message) {
+    const resposta = confirm("você ja fez login! deseja sair ?")
+    if (resposta) { 
+    localStorage.removeItem("token");
+    window.location.href = "./login/index.html";  
+    }
+    } else {
+    window.location.href = "./login/index.html";  
+    }
+})
+
+profile.addEventListener('click', async () => {
+  const token = localStorage.getItem("token");
+  const verifyToken = await fetchGetProfileClient(token) 
+  if (!verifyToken.message) {
+    window.location.href = "./profile/index.html";  
+    } else {
+      alert("Você não fez o login.")
+    }
+})
+
+
+logoutIcon.addEventListener('click', async () => {
+  const token = localStorage.getItem("token");
+  const verifyToken = await fetchGetProfileClient(token) 
+  
+  if (verifyToken.message === 'unauthorized') {
     const resposta = confirm("Você deseja sair ?");
     if (resposta) {
-      // Código a ser executado se o usuário clicar em "OK"
       localStorage.removeItem("token");
-    } else {
-      // Código a ser executado se o usuário clicar em "Cancelar"
     }
   } else {
     alert("Você não fez o login.")
@@ -69,9 +111,9 @@ const createCartItemElement = ({ sku, name, salePrice, image }) => {
   const span = document.createElement('span');
   const img = createProductImageElement(image);
   const icon = createIconSpan();
-
   li.className = 'cart__item';
   span.innerText = `${name} | PRICE: $${salePrice}`;
+  span.setAttribute('produtoId', sku)
   li.appendChild(icon);
   li.appendChild(img);
   li.appendChild(span);
@@ -86,17 +128,34 @@ const createLiReload = () => {
   return li;
 };
 
-emptyCart.addEventListener('click', () => {
+emptyCart.addEventListener('click', async () => {
   cardItems.innerHTML = '';
   buyItem.innerHTML = '';
-  saveCartItems(cardItems.innerHTML);
+  const token = localStorage.getItem("token");
+  await fetchDeleteCartAll(token)
+  
   showPrice();
 });
 
-buyCart.addEventListener('click', () => {
-  console.log(cardItems)
-  cardItems.innerHTML = '';
-  buyItem.innerHTML = 'Produtos comprados';
+buyCart.addEventListener('click', async () => {
+  const cart = cardItems.innerHTML;
+  const tempElement = document.createElement('div');
+  tempElement.innerHTML = cart;
+  const token = localStorage.getItem("token");
+  const spanElements = tempElement.querySelectorAll('span');
+  
+  spanElements.forEach( async item => {
+    const productId = item.getAttribute('produtoId')
+    if(productId) {
+      console.log(productId)
+      await fetchDeleteCartAll(token)
+      await fetchBuyProduct(productId, token)
+    }
+  })
+  
+  cardItems.innerHTML = ''
+  buyItem.innerHTML =  `<h1>Produtos comprados<h1/>`;
+
 
 });
 
@@ -115,25 +174,6 @@ searchInput.addEventListener('keyup', async (e) => {
     searchInput.value = '';
   }
 });
-
-const getClientProfile = async (token) => {
-  
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': token
-  }
-  
-  
-  const init = {
-    method: 'GET',
-    headers
-  }
-  
-  const response = await fetch('http://localhost:3000/cliente/profile', init)
-  const data = await response.json();
-  return data;
-}
-
 
 // Produto
 
@@ -154,38 +194,59 @@ const addShoppingCart = async () => {
     if (element.target.classList.contains('item__add')) {
       buyItem.innerHTML = '';
       const token = localStorage.getItem("token");
-  
-      if(!token) {
+      const verifyToken = await fetchGetProfileClient(token)  
+      if(verifyToken.message === 'unauthorized') {
         window.location.href = "./login/index.html"; 
       }
       const ele = createLiReload();
         cardItems.appendChild(ele);
         const elementId = element.target.parentElement.firstChild.textContent;
+
         await fetchSaveProduct(elementId)
-        const { id, title, price, thumbnail } = await fetchItem(elementId);
+        const { produtoId, produtoName, produtoPrice, produtoImage } = await fetchItem(elementId);
+
         const li = createCartItemElement(
-          { sku: id, name: title, salePrice: price, image: thumbnail },
+          { sku: produtoId, name: produtoName, salePrice: produtoPrice, image: produtoImage },
         );
+
         cardItems.appendChild(li);
         ele.remove();
-        saveCartItems(cardItems.innerHTML);
+        saveCartItems(produtoId, token);
         showPrice();
     }
   });
 };
 
 const cartItemClickListener = async () => {
-  cardItems.addEventListener('click', (e) => {
-    if (e.target.classList.contains('material-symbols-outlined')) {
-      e.target.parentElement.remove();
-      saveCartItems(cardItems.innerHTML);
+  cardItems.addEventListener('click', async (element) => {
+    if (element.target.classList.contains('material-symbols-outlined')) {
+      const token = localStorage.getItem("token");
+      const spanItem = element.target.parentElement.querySelectorAll('span')[1]
+      const productId = spanItem.getAttribute('produtoId')
+      await fetchDeleteCartById(productId, token)
+      element.target.parentElement.remove();
       showPrice();
     }
   });
 };
 
-const getCartItems = () => {
-  cardItems.innerHTML = getSavedCartItems();
+const getCartItems = async () => {
+  const token = localStorage.getItem("token");
+  const data = await getSavedCartItems(token);
+
+  console.log(data[0])
+
+  data.map(async item => {
+    const { produtoId, produtoName, produtoPrice, produtoImage } = await fetchItem(item.produtoId);
+
+    const li = createCartItemElement(
+      { sku: produtoId, name: produtoName, salePrice: produtoPrice, image: produtoImage },
+    );
+
+    cardItems.appendChild(li);
+
+  })
+
   showPrice();
 };
 
@@ -203,7 +264,7 @@ window.onload = async () => {
   await showProduct('computador');
   await addShoppingCart();
   await cartItemClickListener();
-  getCartItems();
+  await getCartItems();
   showPrice();
 };
 

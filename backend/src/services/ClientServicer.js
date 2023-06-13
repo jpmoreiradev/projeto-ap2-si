@@ -49,35 +49,26 @@ class ClientServices {
   }
   
   async update(clienteId, clienteUser, clienteName, clienteOldPassword, clienteNewPassword ) {
-    if(clienteOldPassword === clienteNewPassword) {
-      return 3
-    }
-    
     const clientUser = await client.findOne({
       where: { clienteUser }, 
     })
-
+    
     const clientUserId = await client.findOne({
       where: { clienteId }, 
     })
- 
-    if(clientUser) {
+
+    const compare = clientUser?.clienteId !== clientUserId.clienteId
+
+
+    if(clientUser && compare) {
       return 4
     }
 
-    if(clientUserId ) {
-        return 1
-    }
-
-  const checkPassword = await clientUser.checkPassword(clienteOldPassword)
+  const checkPassword = await clientUserId.checkPassword(clienteOldPassword)
   
   if(!checkPassword) {
     return 2
   }
-
- 
-
-
 
   await client.update({clienteUser, clienteName, clientePassword: await bCrypt.hash(clienteNewPassword, 8)}, {
     where: { clienteId }

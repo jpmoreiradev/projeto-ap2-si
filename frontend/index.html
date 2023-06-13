@@ -7,70 +7,102 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="products/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-    href="https://fonts.googleapis.com/icon?family=Material+Icons"
-    rel="stylesheet"
-    />
-    <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
-    <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,100,0,-25"
-    />
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,100,0,-25" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+    <link rel="shortcut icon" href="/frontend/icon.png"/>
     <script src="./utils/fetchItem.js" defer></script>
+    <script src="./utils/fetchBuyProduct.js" defer></script>
     <script src="./utils/fetchProducts.js" defer></script>
     <script src="./utils/saveCartItems.js" defer></script>
     <script src="./utils/getSavedCartItems.js" defer></script>
     <script src="./utils/fetchSaveProduct.js" defer></script>
+    <script src="./utils/fetchGetProfileClient.js" defer></script>
+    <script src="./utils/fetchDeleteCartAll.js" defer></script>
+    <script src="./utils/fetchDeleteCartById.js" defer></script>
     <script src="./products/script.js" defer></script>
+    <script>
+      function toggleMenu() {
+        var container = document.querySelector(".expand-container");
+        var menu = document.getElementById("expandMenu");
+        var isActive = container.classList.contains("active");
+        if (!isActive) {
+          container.classList.add("active");
+          menu.style.opacity = 1;
+          menu.style.visibility = "visible";
+          menu.style.transform = "scaleY(1)";
+        } else {
+          container.classList.remove("active");
+        }
+      }
 
-    <link rel="shortcut icon" href="https://ava.unicatolicaquixada.edu.br/portal3/theme/image.php/boost/theme/1683567874/favicon">
+      function handleMenuMouseLeave() {
+        var container = document.querySelector(".expand-container");
+        var menu = document.getElementById("expandMenu");
+        var isActive = container.classList.contains("active");
+
+        if (isActive) {
+          menu.style.opacity = 0;
+          menu.style.visibility = "hidden";
+          menu.style.transform = "scaleY(0)";
+          setTimeout(function () {
+            container.classList.remove("active");
+          }, 300);
+        }
+      }
+    </script>
     <title>UNIStore</title>
   </head>
   <body>
-    <header class="header">
-      <div class="container-title">
-        <span class="title"><strong>UNI</strong>Store</span>
-        <div class="search-box">
-          <input class="search-txt" type="text" placeholder="Pesquisar" />
-          <a class="search-btn" href="#">
-            <i class="fas fa-search"></i>
-          </a>
-        </div>
+  <header class="header">
+    <div class="container-title">
+      <a href="./index.html"> <span class="title"><strong>UNI</strong>Store</span></a>
+      <div class="search-box">
+        <input class="search-txt" type="text" placeholder="Pesquisar" />
+        <a class="search-btn" href="#">
+          <i class="fas fa-search"></i>
+        </a>
       </div>
-      <i class="material-icons" style="font-size: 45px; color: white"
-        >shopping_cart</i>
-      <div class="container-cartTitle">
-        <span class="cart__title">Meu carrinho</span>
+    </div>
+    <i class="material-icons" style="font-size: 40px; color: white; padding: 10px;"
+      >shopping_cart</i
+    >
+    <div class="container-cartTitle">
+      <span class="cart__title">Meu carrinho</span>
+    </div>
+    <div class="expand-container">
+      <button class="icons material-icons" style="font-size: 40px; color: white; padding: 10px" onclick="toggleMenu()">
+        account_circle
+      </button>
+      <div class="expand-menu" id="expandMenu" onmouseleave="handleMenuMouseLeave()">
+        <ul>
+          <li class="login"> Login</li>
+          <li class="profile"> Perfil</li>
+          <li class="my-products"> Meus pedidos </li>
+          <li class="logout-btn"><a href="login/index.html">Sair</a></li>
+        </ul>
       </div>
-      <a href="../frontend/login/index.html"><i class="material-icons" style="font-size: 45px; color: white">account_circle</i></a>
-      <a href="../frontend/login/index.html"><i class="material-icons logout-btn" style="font-size: 45px; color: white">logout</i></a>
-    </header>
-    <section class="container">
-      <section class="items"></section>
-      <section class="cart">
-        <h1 class="buy-item"></h1>
-        <ol class="cart__items"></ol>
-        <div class="price">
-          <span>Total:</span>
-          <span class="total-price"></span>
-        </div>
-        <div class="buttons-cart">
-          <button class="empty-cart">Esvaziar carrinho</button>
-          <button class="buy-cart">Comprar itens</button>
-        </div>
-      </section>
+  </header>
+  <section class="container">
+    <section class="items"></section>
+    <section class="cart">
+      <h1 class="buy-item"></h1>
+      <ol class="cart__items"></ol>
+      <div class="price">
+        <span>Total:</span>
+        <span class="total-price"></span>
+      </div>
+      <div class="buttons-cart">
+        <button class="empty-cart">Esvaziar carrinho</button>
+        <button class="buy-cart">Comprar itens</button>
+      </div>
     </section>
-    <a class="back-to-top" href="#">➤</a>
-  </body>
+  </section>
+  <a class="back-to-top" href="#">➤</a>
+</body>
+
 </html>
