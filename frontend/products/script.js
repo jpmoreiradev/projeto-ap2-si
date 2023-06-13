@@ -138,9 +138,22 @@ emptyCart.addEventListener('click', async () => {
 });
 
 buyCart.addEventListener('click', async () => {
-  const productIds = cardItems.innerHTML;
-  console.log(productIds)
+  const cart = cardItems.innerHTML;
+  const tempElement = document.createElement('div');
+  tempElement.innerHTML = cart;
+  const token = localStorage.getItem("token");
+  const spanElements = tempElement.querySelectorAll('span');
   
+  spanElements.forEach( async item => {
+    const productId = item.getAttribute('produtoId')
+    if(productId) {
+      console.log(productId)
+      await fetchDeleteCartAll(token)
+      await fetchBuyProduct(productId, token)
+    }
+  })
+  
+  cardItems.innerHTML = ''
   buyItem.innerHTML =  `<h1>Produtos comprados<h1/>`;
 
 
