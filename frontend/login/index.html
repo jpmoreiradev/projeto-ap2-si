@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Interface de Login</title>
-    <link rel="stylesheet" href="./style.css">
-  </head>
 
-  <body>
-    <div class="login-container">
-      <h1>Login</h1>
-      <form id="login-form">
-        <div class="form-group">
-          <label for="username">Usuário:</label>
-          <input type="text" id="username" name="username" required />
+<head>
+  <title>UNIStore - Login</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="shortcut icon" href="/frontend/icon.png"/>
+</head>
+
+<body>
+  <div class="login-container">
+    <h1>Login</h1>
+    <form id="login-form">
+      <div class="form-group">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <div class="form-group">
+        <button type="submit">Entrar</button>
+        <div class="signup-link">
+          <a href="../register/index.html">Criar conta</a>
         </div>
-        <div class="form-group">
-          <label for="password">Senha:</label>
-          <input type="password" id="password" name="password" required />
-        </div>
-        <div class="form-group">
-          <button type="submit">Entrar</button>
-          <div class="signup-link">
-            <a href="../register/index.html">Criar conta</a>
-          </div>
-        </div>
-      </form>
-    </div>
-    <script src="../login/script.js"></script>
-  </body>
+      </div>
+    </form>
+  </div>
+  <script src="../login/script.js"></script>
+</body>
+
 </html>

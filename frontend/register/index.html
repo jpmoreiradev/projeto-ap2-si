@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Interface de Cadastro</title>
-    <link rel="stylesheet" href="./style.css">
-  </head>
-  <body>
-    <div class="register-container">
-      <h1>Cadastre-se</h1>
-      <form id="register-form">
-        <div class="form-group">
-          <label for="name">Nome:</label>
-          <input type="text" id="name" name="name" required />
+
+<head>
+  <title>UNIStore - Cadastro</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="shortcut icon" href="/frontend/icon.png"/>
+</head>
+
+<body>
+  <div class="register-container">
+    <h1>Cadastro</h1>
+    <form id="register-form">
+      <div class="form-group">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+      <div class="form-group">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <div class="form-group">
+        <button type="submit">Cadastrar</button>
+        <div class="login-link">
+          <a href="../login/index.html">Já tenho uma conta</a>
         </div>
-        <div class="form-group">
-          <label for="username">Usuário:</label>
-          <input type="text" id="username" name="username" required />
-        </div>
-        <div class="form-group">
-          <label for="password">Senha:</label>
-          <input type="password" id="password" name="password" required />
-        </div>
-        <div class="form-group">
-          <button type="submit">Cadastrar</button>
-          <div class="login-link">
-            <a href="../login/index.html">Já tenho uma conta</a>
-          </div>
-        </div>
-      </form>
-    </div>
-    <script src="../register/script.js"></script>
-  </body>
+      </div>
+    </form>
+  </div>
+  <script src="../register/script.js"></script>
+</body>
+
 </html>
