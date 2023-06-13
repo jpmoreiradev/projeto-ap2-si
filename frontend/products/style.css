@@ -403,8 +403,8 @@ i {
 
 .expand-menu {
   position: absolute;
-  top: 130%;
-  left: -160px;
+  top: 110%;
+  left: -150px;
   width: 200px;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);

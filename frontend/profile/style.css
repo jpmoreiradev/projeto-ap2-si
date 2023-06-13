@@ -44,7 +44,9 @@ body {
     margin: 0 auto;
     padding: 10px;
     text-align: center;
-    background-color: #ff7f50;
+    /* background-color: #ff7f50; */
+    /* background-color: #FF8C00; */
+    background-color: #ff6700;
     color: #fff;
     font-size: 16px;
     border: none;
@@ -53,5 +55,7 @@ body {
   }
 
   .btn:hover {
-    background-color: #ff6347;
+    /* background-color: #ff6347; */
+    /* background-color: #FFA500; */
+    background-color: #ff7800;
   }
