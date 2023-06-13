@@ -111,9 +111,9 @@ const createCartItemElement = ({ sku, name, salePrice, image }) => {
   const span = document.createElement('span');
   const img = createProductImageElement(image);
   const icon = createIconSpan();
-
   li.className = 'cart__item';
   span.innerText = `${name} | PRICE: $${salePrice}`;
+  span.setAttribute('produtoId', sku)
   li.appendChild(icon);
   li.appendChild(img);
   li.appendChild(span);
@@ -137,9 +137,12 @@ emptyCart.addEventListener('click', async () => {
   showPrice();
 });
 
-buyCart.addEventListener('click', () => {
-  cardItems.innerHTML = '';
+buyCart.addEventListener('click', async () => {
+  const productIds = cardItems.innerHTML;
+  console.log(productIds)
+  
   buyItem.innerHTML =  `<h1>Produtos comprados<h1/>`;
+
 
 });
 
@@ -204,8 +207,10 @@ const addShoppingCart = async () => {
 const cartItemClickListener = async () => {
   cardItems.addEventListener('click', async (element) => {
     if (element.target.classList.contains('material-symbols-outlined')) {
-
-
+      const token = localStorage.getItem("token");
+      const spanItem = element.target.parentElement.querySelectorAll('span')[1]
+      const productId = spanItem.getAttribute('produtoId')
+      await fetchDeleteCartById(productId, token)
       element.target.parentElement.remove();
       showPrice();
     }
