@@ -18,7 +18,7 @@ CREATE TABLE `produtos` (
 
 
 CREATE TABLE `pedidos` (
-	`pedido_id` smallint(5) NOT NULL,
+	`pedido_id` smallint(5) NOT NULL AUTO_INCREMENT,
 	`produto_id` varchar(32) NOT NULL,
 	`cliente_id` smallint(5) NOT NULL,
 	`pedido_date` DATE NOT NULL,

@@ -3,6 +3,7 @@ import Produtos from '../models/ProductsModel.js';
 import Carrinho from '../models/CartModel.js'
 import productsApi from './mercadoLivreApi/ProductsApi.js';
 import { Op } from 'sequelize';
+import Pedidos from '../models/MyRequestsModel.js';
 class ProductsServicer {
   async create(produtoId) {
     const productItem = await productsApi.productItem(produtoId)
@@ -71,8 +72,6 @@ class ProductsServicer {
       produtoId: product.produtoId,
       clienteId
     })
-
-
     return product; 
   }
 
@@ -120,6 +119,35 @@ class ProductsServicer {
       }  
 
       return myProducts;
+  }
+
+  async getAllMyProduct(clienteId) {
+    const myProducts = await Pedidos.findAll({
+      where: { clienteId }
+    })
+    if(!myProducts) {
+        return undefined
+    }  
+
+    return myProducts;
+}
+
+
+  async addBuyItem(produtoId, clienteId) {
+    const product = await Produtos.findOne({
+      where: { produtoId }
+    })
+    if(!product) {
+        return 1
+    }
+
+    await Pedidos.create({
+      produtoId: product.produtoId,
+      clienteId,
+      pedidoDate: new Date().toString()
+
+    })
+    return product; 
   }
 }
 
