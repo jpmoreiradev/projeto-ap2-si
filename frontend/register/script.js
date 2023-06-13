@@ -42,7 +42,6 @@ const registerEvent = async () => {
       const register = await createClient(clienteName, clienteUser, clientePassword);
       if (register.newClient) {
         await loginClient(clienteUser, clientePassword)
-        console.log(register.newClient)
         alert('Cadastro Bem-Sucedido! Bem-vindo a Unistore');
         window.location.href = "../index.html"; 
         } else {

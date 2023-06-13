@@ -68,3 +68,56 @@ myProducts.addEventListener('click', async () => {
       alert("Você não fez o login.")
     }
   });
+
+  const updateClient = async (
+    clienteUser, 
+    clienteName,
+    clienteOldPassword,
+    clienteNewPassword,
+    token,
+    ) => {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': token
+
+    }
+    const init = {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify({
+        clienteUser, 
+        clienteName,
+        clienteOldPassword,
+        clienteNewPassword,
+      })
+    }
+    const response = await fetch('http://localhost:3000/cliente/profile', init)
+    const data = await response.json();
+    return data;
+  }
+  
+  
+  const updateEvent = async () => {
+      document.getElementById('update-form').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const clienteName = document.getElementById('new-nome').value;
+        const clienteUser = document.getElementById('new-user').value;
+        const clienteOldPassword = document.getElementById('old-pass').value;
+        const clienteNewPassword = document.getElementById('new-pass').value;
+        const token = localStorage.getItem("token");
+
+        console.log( clienteUser, 
+          clienteName,
+          clienteOldPassword,
+          clienteNewPassword,)
+
+        const update = await updateClient(clienteUser, clienteName, clienteOldPassword, clienteNewPassword, token);
+        if (update.updateClient) {
+          alert('Update Bem-Sucedido! ');
+          } else {
+          alert(`${register.message}`);
+        }
+      });
+    }
+
+updateEvent()
