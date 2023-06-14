@@ -24,6 +24,8 @@ O Express é um framework web rápido e flexível para Node.js. Ele simplifica a
 
 O Jsonwebtoken é uma biblioteca que permite a geração e validação de tokens de autenticação. Esses tokens podem ser usados para autenticar usuários e proteger rotas sensíveis no servidor. No projeto, o Jsonwebtoken pode ter sido utilizado para implementar um sistema de autenticação seguro para os usuários da loja.
 
+O Sequelize é uma biblioteca de mapeamento objeto-relacional (ORM) para Node.js, que permite aos desenvolvedores interagir facilmente com bancos de dados relacionais, como MySQL, PostgreSQL, SQLite, entre outros. Ele fornece uma interface fácil de usar para realizar operações de banco de dados, abstraindo as consultas SQL subjacentes.
+
 ### Requisitos para roda o projeto
 
 Docker: É necessário ter o Docker instalado em seu sistema para configurar e executar o banco de dados MySQL. O Docker permite a criação de contêineres para isolar e executar aplicativos em ambientes controlados. Você pode baixar e instalar o Docker a partir do site oficial: https://www.docker.com/products/docker-desktop/.
