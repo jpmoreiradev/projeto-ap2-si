@@ -81,9 +81,9 @@ const createProductItemElement = ({ date, orderNumber, totalPrice, produtoName, 
   var orderHeader = document.createElement('div');
   orderHeader.className = 'order-header';
   orderHeader.innerHTML = `
-    <span>Data: ${date}</span>
-    <span>Pedido N°: #${orderNumber}</span>
-    <span>Total: R$${totalPrice}</span>
+    <span><span class="header-span">Data: </span> ${date}</span>
+    <span><span class="header-span">Pedido N°: </span> #${orderNumber}</span>
+    <span><span class="header-span">Total: </span> R$${totalPrice}</span>
   `;
 
   // Crie a imagem do produto

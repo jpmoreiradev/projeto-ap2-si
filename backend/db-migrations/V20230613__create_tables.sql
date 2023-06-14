@@ -1,4 +1,3 @@
-
 CREATE TABLE `clientes` (
 	`cliente_id` smallint(5) NOT NULL AUTO_INCREMENT,
 	`cliente_name` varchar(256) NOT NULL,
@@ -32,8 +31,18 @@ CREATE TABLE `categorias` (
 );
 
 CREATE TABLE `carrinho` (
-    `carrinho_id` bigint(10) NOT NULL AUTO_INCREMENT,
+    `carrinho_id` int(10) NOT NULL AUTO_INCREMENT,
     `produto_id` varchar(32) NOT NULL,
 	`cliente_id` smallint(5) NOT NULL,
 	PRIMARY KEY (`carrinho_id`)
 	);
+
+ALTER TABLE `carrinho` ADD FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`produto_id`);
+
+ALTER TABLE `carrinho` ADD FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`cliente_id`);
+
+ALTER TABLE `produtos` ADD FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`categoria_id`);
+
+ALTER TABLE `pedidos` ADD FOREIGN KEY (`produto_id`) REFERENCES `produtos` (`produto_id`);
+
+ALTER TABLE `pedidos` ADD FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`cliente_id`);
