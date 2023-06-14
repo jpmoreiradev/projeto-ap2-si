@@ -114,6 +114,7 @@ myProducts.addEventListener('click', async () => {
         const update = await updateClient(clienteUser, clienteName, clienteOldPassword, clienteNewPassword, token);
         if (update.updateClient) {
           alert('Update Bem-Sucedido! ');
+          window.location.href = "./index.html";  
           } else {
           alert(`${register.message}`);
         }

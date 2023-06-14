@@ -51,6 +51,7 @@ login.addEventListener('click', async () => {
 profile.addEventListener('click', async () => {
   const token = localStorage.getItem("token");
   const verifyToken = await fetchGetProfileClient(token) 
+  console.log(verifyToken)
   if (!verifyToken.message) {
     window.location.href = "./profile/index.html";  
     } else {
