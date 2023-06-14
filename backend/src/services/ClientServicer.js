@@ -57,7 +57,7 @@ class ClientServices {
       where: { clienteId }, 
     })
 
-    const compare = clientUser?.clienteId !== clientUserId.clienteId
+    const compare = clientUser?.clienteId !== clientUserId?.clienteId
 
 
     if(clientUser && compare) {
