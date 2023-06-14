@@ -63,7 +63,7 @@ docker compose up -d
 
 ### Executar o script SQL para criar as tabelas no banco de dados
 ~~~bash
-mysql -u root -proot -h 0.0.0.0 unistore < db-migrations/V20230518__create_tables.sql 
+mysql -u root -proot -h 0.0.0.0 unistore < db-migrations/V20230613__create_tables.sql 
 ~~~
 ![Screenshot from 2023-06-14 01-00-54](https://github.com/jpmoreiradev/projeto-ap2-si/assets/78699072/66c6e8a6-c68b-4044-a8f7-b45574a16cf1)
 
