@@ -32,14 +32,48 @@ Node.js e npm: O back-end do projeto foi desenvolvido utilizando Node.js e npm (
 
 Git: permitirá que você clone o repositório do projeto, mantenha um histórico de alterações e facilite a colaboração com outros desenvolvedores.
 
+### Clonar o repositório do projeto:
 ~~~bash
 git clone https://github.com/jpmoreiradev/projeto-ap2-si.git
 ~~~
 
+![Screenshot from 2023-06-14 00-24-50](https://github.com/jpmoreiradev/projeto-ap2-si/assets/78699072/9e2ab50d-a696-4d17-a2bd-de7263d8e4e2)
+
+### Navegar até o diretório do backend
 ~~~bash
 cd projeto-ap2-si/backend
 ~~~
 
+![Screenshot from 2023-06-14 00-30-07](https://github.com/jpmoreiradev/projeto-ap2-si/assets/78699072/1b22bce4-ec6c-40aa-afe0-c81e6998a713)
+
+### Instalar as dependências do projeto
 ~~~bash
 npm install
 ~~~
+![Screenshot from 2023-06-14 00-32-59](https://github.com/jpmoreiradev/projeto-ap2-si/assets/78699072/ed0924c7-4264-4ca7-9227-b0c933845474)
+
+### Iniciar o contêiner Docker para o banco de dados MySQL em segundo plano
+~~~bash
+docker compose up -d
+~~~
+
+![Screenshot from 2023-06-14 00-42-35](https://github.com/jpmoreiradev/projeto-ap2-si/assets/78699072/b5167ce2-6ee0-4fa5-a409-959716f6d573)
+
+### Executar o script SQL para criar as tabelas no banco de dados
+~~~bash
+mysql -u root -proot -h 0.0.0.0 unistore < db-migrations/V20230518__create_tables.sql 
+~~~
+![Screenshot from 2023-06-14 01-00-54](https://github.com/jpmoreiradev/projeto-ap2-si/assets/78699072/66c6e8a6-c68b-4044-a8f7-b45574a16cf1)
+
+### Iniciar o servidor de desenvolvimento do backend
+~~~bash
+npm run dev
+~~~
+
+![Screenshot from 2023-06-14 00-45-25](https://github.com/jpmoreiradev/projeto-ap2-si/assets/78699072/63ce3b14-6b9e-4ffa-9df1-1deff05b4337)
+
+### inicializar o projeto
+
+[Screencast from 2023-06-14 01-13-45.webm](https://github.com/jpmoreiradev/projeto-ap2-si/assets/78699072/74ff54ec-6561-4fa4-8328-04c61c1c17f5)
+
+
