@@ -63,10 +63,11 @@ logoutIcon.addEventListener('click', async () => {
   const token = localStorage.getItem("token");
   const verifyToken = await fetchGetProfileClient(token) 
   
-  if (verifyToken.message === 'unauthorized') {
+  if (!verifyToken.message) {
     const resposta = confirm("Você deseja sair ?");
     if (resposta) {
-      localStorage.removeItem("token");
+      localStorage.removeItem("token")
+      window.location.href = "./index.html";  
     }
   } else {
     alert("Você não fez o login.")
