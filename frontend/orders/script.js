@@ -63,6 +63,7 @@ logoutIcon.addEventListener('click', () => {
     const resposta = confirm("Você deseja sair ?");
     if (resposta) {
       localStorage.removeItem("token");
+      window.location.href = "./index.html";  
     }
   } else {
     alert("Você não fez o login.")

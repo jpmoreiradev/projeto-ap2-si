@@ -119,41 +119,41 @@ h1 {
   background-color: var(--orange);
   width: 36%;
   height: 100%;
-  margin-left: 20px;
+  margin-left: 15px;
 }
 
 .container-cartTitle span {
   z-index: 1;
 }
 
-.container-cartTitle:after {
+.container-cartTitle::after {
   content: '';
   position: absolute;
   top: 15px;
-  right: 61.5%;
-  width: 39.5%;
+  right: 2;
+  width: 60%;
   height: 15px;
   background: var(--white-100);
   transform: skew(-45deg);
   z-index: 0;
 }
 
-.container-cartTitle:before {
+.container-cartTitle::before {
   content: '';
   position: absolute;
   top: 30px;
-  right: 61.5%;
-  width: 39.5%;
+  right: 2;
+  width: 60%;
   height: 15px;
   background: var(--white-100);
   transform: skew(45deg);
   z-index: 0;
 }
 
+
 .container-cartTitle .cart__title {
   color: var(--orange);
   font-family: monospace;
-  font-size: 20px;
   padding-left: 20px;
   font-weight: 700;
 }

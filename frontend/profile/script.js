@@ -62,6 +62,7 @@ myProducts.addEventListener('click', async () => {
     if (!verifyToken.message) {
       const resposta = confirm("Você deseja sair ?");
       if (resposta) {
+        window.location.href = "../index.html";  
         localStorage.removeItem("token");
       }
     } else {
